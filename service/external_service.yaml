@@ -1,0 +1,7 @@
+kind: "Service"
+apiVersion: "v1"
+metadata:
+  name: "example"
+spec:
+  type: ExternalName                # <-- Use some external DNS
+  externalName: www.example.com      # <-- specified here

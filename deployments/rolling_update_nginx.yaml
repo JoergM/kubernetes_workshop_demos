@@ -1,0 +1,44 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    run: nginx
+  name: nginx
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      run: nginx
+  strategy:                    # <-- Type of upgrade
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1              # <-- number of extra containers
+      maxUnavailable: 0        # <-- respective number of possible less containers
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: nginx
+    spec:
+      containers:
+      - image: nginx:1.13       # <-- new version 
+        name: nginx
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    run: nginx
+  name: nginx
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    run: nginx

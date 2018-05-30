@@ -1,0 +1,44 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    run: nginx
+  name: nginx
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      run: nginx
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        run: nginx
+    spec:
+      containers:
+      - image: nginx:1.12
+        name: nginx
+        volumeMounts:                           # <-- Mounting a volume to the container
+        - name: content
+          mountPath: /usr/share/nginx/html/
+      volumes:                                  # <-- Defining ConfigMap as Volume
+        - name: content
+          configMap:
+            name: content
+
+---   
+
+apiVersion: v1
+kind: Service  
+metadata:
+  labels:
+    run: nginx
+  name: nginx
+spec:
+  type: NodePort                        # <-- expose service externally
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    run: nginx

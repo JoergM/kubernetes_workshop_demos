@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    run: diagnose
+  name: diagnose
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: diagnose
+  template:
+    metadata:
+      labels:
+        run: diagnose
+    spec:
+      containers:
+      - image: joergm/diagnose
+        name: diagnose
