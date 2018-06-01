@@ -8,7 +8,7 @@
 
 In more complex scenarios you can store complete directories as configuration and mount them into a pod.
 
-In this example we have a website stored in a directory `www` which will be mounted into a pod as the source for 
+In this example we have a website stored in a directory [www](www/) which will be mounted into a pod as the source for 
 an nginx server. In order to store the directory as a configuration into the cluster we use a script that itself calls kubectl in an imperative way.
 
 ```

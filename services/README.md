@@ -2,7 +2,7 @@
 
 ## Making pods available via service
 
-Multiple pods can be available under a single address which is called a service. An example definition of pods with a service is included in the file `service_5_nginx.yaml`. It starts five instances of an nginx pod and defines a service pointing to them. Start it using: 
+Multiple pods can be available under a single address which is called a service. An example definition of pods with a service is included in the file [service_5_nginx.yaml](service_5_nginx.yaml). It starts five instances of an nginx pod and defines a service pointing to them. Start it using: 
 
 ```
 kubectl apply -f service_5_nginx.yaml
