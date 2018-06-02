@@ -2,7 +2,32 @@
 
 ## Configuration as Environment Variables
 
-[TODO]
+There are several ways to inject environment variables into containers. The configuration-file [env_config.yaml](env_config.yaml) demonstrates two of them. Apply the config using:
+
+```
+kubectl apply -f env_config.yaml
+```
+
+**Note**
+
+If you had the nginx containers running before, you will see a rolling update of all instances. Watch it using `kubectl get pods`.
+
+After the pods have restarted connect to one or more of them using:
+
+```
+kubectl exec -ti nginx-... sh
+```
+
+Find the complete name of the pod by using `kubectl get pods`. If you have shell completion installed for kubectl it might be enogh to press tab after `nginx`.
+
+Inside the container try echoing the injected environment variables:
+
+```
+# echo $VIA_CONFIGMAP
+From Configmap
+# echo $VIA_SPEC
+From Spec
+```
 
 ## Configuration as Files or directories
 

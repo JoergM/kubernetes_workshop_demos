@@ -1,0 +1,38 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    run: nginx
+  name: nginx
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      run: nginx
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: nginx
+    spec:
+      containers:
+      - image: nginx:1.12
+        name: nginx
+        env:                                #<-- Adding Environment variables to a container
+        - name: VIA_SPEC                
+          value: "From Spec"                #<-- Value hardcoded in the spec
+        - name: VIA_CONFIGMAP
+          valueFrom:                        #<-- instead of direct value reference it
+            configMapKeyRef:                #<-- all info to get a specific variable value 
+              name: nginx-config
+              key: example.value
+
+---
+apiVersion: v1
+kind: ConfigMap                             #<-- defining a configMap
+metadata:
+  name: nginx-config
+data:
+  example.value: "From Configmap"           #<-- one of many possible values
