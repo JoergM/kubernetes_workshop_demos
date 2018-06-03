@@ -39,8 +39,19 @@ Multiple Containers in a pod share the filesystem and the network address. All c
 
 ### Init-Container
 
-[TODO]
-Create some content for the nginx.
+Init containers are run before the service containers are started. There can be multiple of them but the example only shows one. 
+
+In our example we are starting an example container, that changes the content of the website shown by the nginx server started later on. See the full definition in [init_nginx.yaml](init_nginx.yaml). To start it use:
+
+```
+kubectl apply -f init_nginx.yaml
+``` 
+
+This file also creates a service so you can see the results of the init in your browser. If you have not read about [services](../services/README.md) yet, ignore this and just use the following to see the result:
+
+```
+minikube service nginx
+``` 
 
 ### Sidecar
 
