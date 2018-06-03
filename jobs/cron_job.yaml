@@ -1,0 +1,16 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: sleeper
+spec:
+  schedule: "*/1 * * * *"                 #<-- Start one jobe every minute
+  successfulJobsHistoryLimit: 1           #<-- only keep the latest job in history
+  jobTemplate:                            #<-- this is effectively what we used for the single job 
+    spec:
+      template:
+        spec:
+          containers:
+          - name: sleeper
+            image: alpine
+            command: ["sleep",  "10"]
+          restartPolicy: Never
