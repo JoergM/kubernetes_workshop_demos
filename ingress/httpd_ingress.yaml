@@ -1,0 +1,36 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    run: httpd
+  name: httpd
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      run: httpd
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: httpd
+    spec:
+      containers:
+      - image: httpd:2.4-alpine
+        name: httpd
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: httpd
+  name: httpd
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    run: httpd

@@ -1,0 +1,33 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: nginx-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: "/" #<-- strip the path
+spec:
+  rules:
+  - host: minikube               #<-- virtual hostname
+    http:
+      paths:
+      - path: /nginx             #<-- path this rule applies to
+        backend:
+          serviceName: nginx     #<-- Service that serves the requests
+          servicePort: 80
+
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: httpd-ingress           # <-- the same as above only for another service
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: "/"
+spec:
+  rules:
+  - host: minikube
+    http:
+      paths:
+      - path: /httpd
+        backend:
+          serviceName: httpd
+          servicePort: 80
+
