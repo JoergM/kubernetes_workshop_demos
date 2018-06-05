@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: sleeper
 spec:
-  schedule: "*/1 * * * *"                 #<-- Start one jobe every minute
+  schedule: "*/1 * * * *"                 #<-- Start one job every minute
   successfulJobsHistoryLimit: 1           #<-- only keep the latest job in history
   jobTemplate:                            #<-- this is effectively what we used for the single job 
     spec:

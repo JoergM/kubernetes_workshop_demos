@@ -1,8 +1,6 @@
 # Kubernetes Demos 
 
-This repository contains the demos used at the Workshop:
-
-"Kubernetes die abstrakte Cloud".
+This repository contains the demos used at certain Workshops about Kubernetes.
 
 It is grouped by the different abstractions and concepts used in Kubernetes.
 Each directory contains its own README to explain how to use it. 
@@ -40,7 +38,7 @@ it is installed and activated by default. You can watch it using the following c
 minikube dashboard
 ``` 
 
-### The diagnose container
+### The diagnose pod
 
 For some demos it is necessary to connect to a pod that runs inside the cluster. This is e.g. necessary when you want to test network connections that are not visible outside the cluster. The Kubernetes configuration in [diagnose.yaml](diagnose.yaml) defines a pod that does nothing and has a certain number of tools already installed. Install this container in the cluster using:
 
