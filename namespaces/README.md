@@ -1,6 +1,4 @@
-# Namespaces and service accounts
-
-## Namespaces
+# Namespaces
 
 Namespaces are a simple way to group objects in a Kubernetes cluster. It is useful to reduce the clutter when working with the Kubernetes commands but is also the basis for a number of security mechanisms.
 
@@ -52,7 +50,3 @@ When inside the diagnose container you can use:
 ```
 curl nginx.other
 ```
-
-## Service accounts
-
-[TODO]
