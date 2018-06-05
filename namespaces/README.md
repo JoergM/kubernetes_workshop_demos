@@ -44,6 +44,14 @@ To open the respective service in your browser use:
 minikube service -n other nginx
 ```
 
+**Experiment**
+
+Log into the diagnose container in the default namespace and try to access the nginx service in the "other" namespace.
+When inside the diagnose container you can use:
+
+```
+curl nginx.other
+```
 
 ## Service accounts
 

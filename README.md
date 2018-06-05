@@ -16,7 +16,7 @@ The following table gives an overview of the content:
 | [jobs](jobs/README.md)                                                       | Running pods regularly                                |
 | [persistent_volumes](persistent_volumes/README.md)                           | Storing data in a cluster                             |
 | [stateful_sets](stateful_sets/README.md)                                     | Allow Pods to carry state                             |
-| [namespaces_and_service_accounts](namespaces_and_service_accounts/README.md) | Splitting a cluster in namespaces and organize access |
+| [namespaces](namespaces/README.md) | Splitting a cluster into namespaces |
 
 ## Requirements to run the demos
 
