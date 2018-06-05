@@ -1,0 +1,40 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    run: redis
+  name: redis 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: redis  
+  template:
+    metadata:
+      labels:
+        run: redis
+    spec:
+      containers:
+      - image: redis:3.2-alpine
+        name: redis
+        command: ["redis-server", "--appendonly", "yes"]  #<-- starting redis in persistent mode
+        volumeMounts:
+        - name: redis-data                                #<-- mounting the volume inside the container
+          mountPath: /data 
+      volumes: 
+      - name: redis-data
+        persistentVolumeClaim:                            #<-- the volume is based on a PVC
+          claimName: redis-data-claim
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim                               #<-- definition of the PVC
+metadata:
+  name: redis-data-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+
