@@ -1,0 +1,47 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    run: nginx
+  name: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: nginx
+  template:
+    metadata:
+      labels:
+        run: nginx
+    spec:
+      containers:
+      - image: nginx:1.12
+        name: nginx
+        volumeMounts:                   # <-- Mounting the shared volume
+          - name: content
+            mountPath: /usr/share/nginx/html 
+      - image: alpine                   # <-- second container, that updates the content
+        name: sidecar
+        command: ["sh", "-c", "while :; do echo $(date) > /usr/share/nginx/html/index.html; sleep 5; done"]  #<-- just running a simple loop to update the content
+        volumeMounts:                   # <-- Mounting the shared volume as target
+          - name: content
+            mountPath: /usr/share/nginx/html 
+      volumes:                          #<-- Volume to transfer data between both containers                             
+      - name: content
+        emptyDir: {}                    #<-- initially just an empty dir in the pod
+
+---
+apiVersion: v1                          #<-- service to demontrate the changed content see demos on services
+kind: Service                           
+metadata:
+  labels:
+    run: nginx
+  name: nginx
+spec:
+  type: NodePort                        
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    run: nginx

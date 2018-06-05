@@ -55,4 +55,11 @@ minikube service nginx
 
 ### Sidecar
 
-[TODO]
+A sidecar container runs in parallel to the main service of a pod. There are many possible usages to this pattern. One of them would be to update the static content of a website on a regular basis. The example in [sidecar.yaml](sidecar.yaml) does this by writing the current date into the index.html every 5 seconds. Apply this configuration and watch the results using:
+
+```
+kubectl apply -f sidecar.yaml
+minikube service nginx
+``` 
+
+A reload should give you a new timestamp every 5 seconds.
