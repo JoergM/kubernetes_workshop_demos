@@ -17,6 +17,7 @@ The following table gives an overview of the content:
 | [persistent_volumes](persistent_volumes/README.md)                           | Storing data in a cluster                             |
 | [stateful_sets](stateful_sets/README.md)                                     | Allow Pods to carry state                             |
 | [namespaces](namespaces/README.md) | Splitting a cluster into namespaces |
+| [helm](helm/README.md) | Using the Kubernetes package manager |
 
 ## Requirements to run the demos
 
