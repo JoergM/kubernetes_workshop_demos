@@ -4,7 +4,7 @@ metadata:
   name: nginx
 spec:
   serviceName: "nginx"
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       run: stateful-nginx
