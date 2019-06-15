@@ -44,6 +44,12 @@ Change the number of pods back to 1. Edit `5_nginx.yaml` to change the number of
 kubectl apply -f 5_nginx.yaml
 ```
 
+Alternatively use the scale command to scale the pods manually:
+
+```
+kubectl scale deployment nginx --replicas=1
+```
+
 ## Updating versions
 
 Deployments are also used to update pods to new container versions. 
