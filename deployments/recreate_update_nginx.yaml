@@ -19,5 +19,5 @@ spec:
         run: nginx
     spec:
       containers:
-      - image: nginx:1.12        # <-- another version again
+      - image: nginx:1.16        # <-- another version again
         name: nginx
