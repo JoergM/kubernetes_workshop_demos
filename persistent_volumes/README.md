@@ -16,7 +16,7 @@ kubectl get pvc
 kubectl get pv
 ``` 
 
-The persistent volume is the actual instance of the Volume claim. It can be maintained manually, but in most cases there will be some sort of dnamic provisioning. If you are using minikube for this example there will be a hostpath mounted as the volume. 
+The persistent volume is the actual instance of the Volume claim. It can be maintained manually, but in most cases there will be some sort of dynamic provisioning. If you are using minikube for this example there will be a hostpath mounted as the volume. 
 
 ### Creating some data
 
