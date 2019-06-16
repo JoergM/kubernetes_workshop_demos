@@ -15,10 +15,16 @@ Watch the job running and finishing using:
 kubectl get pods
 ```
 
+After it is finished you can take a look at the result e.g. in the log.
+
+```
+kubectl logs sleeper-...
+```
+
 A finished job will stay around in your pod list unless you delete it manually using:
 
 ```
-kubectl delete pod sleeper-...
+kubectl delete job sleeper
 ```
 
 ## Regular jobs using cron expressions

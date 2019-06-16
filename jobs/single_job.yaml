@@ -8,5 +8,8 @@ spec:
       containers:
       - name: sleeper
         image: alpine
-        command: ["sleep",  "10"]
+        command: ["/bin/sh",  "-c"]
+        args: 
+            - sleep 10; 
+              echo Job finished!;
       restartPolicy: Never
