@@ -6,19 +6,26 @@ It is grouped by the different abstractions and concepts used in Kubernetes.
 Each directory contains its own README to explain how to use it. 
 The following table gives an overview of the content: 
 
-| Directory                                                                    | Content                                               |
-| ---------------------------------------------------------------------------- | ----------------------------------------------------- |
-| [pods](pods/README.md)                                                       | Basics of Pods                                        |
-| [deployments](deployments/README.md)                                         | Deploying Pods                                        |
-| [services](services/README.md)                                               | Services to access pods                               |
-| [configuration](configuration/README.md)                                     | Store configuration and secrets and apply it to pods  |
-| [ingress](ingress/README.md)                                                 | Organize access to services from the outside world    |
-| [jobs](jobs/README.md)                                                       | Running pods regularly                                |
-| [persistent_volumes](persistent_volumes/README.md)                           | Storing data in a cluster                             |
-| [stateful_sets](stateful_sets/README.md)                                     | Allow Pods to carry state                             |
-| [namespaces](namespaces/README.md) | Splitting a cluster into namespaces |
-| [helm](helm/README.md) | Using the Kubernetes package manager |
-| [monitoring](monitoring/README.md) | Monitoring your Kubernetes cluster |
+| Directory                                                | Content                                              |
+| -------------------------------------------------------- | ---------------------------------------------------- |
+| [pods](pods/README.md)                                   | Basics of Pods                                       |
+| [deployments](deployments/README.md)                     | Deploying Pods                                       |
+| [services](services/README.md)                           | Services to access pods                              |
+| [configuration](configuration/README.md)                 | Store configuration and secrets and apply it to pods |
+| [ingress](ingress/README.md)                             | Organize access to services from the outside world   |
+| [jobs](jobs/README.md)                                   | Running pods regularly                               |
+| [persistent_volumes](persistent_volumes/README.md)       | Storing data in a cluster                            |
+| [stateful_sets](stateful_sets/README.md)                 | Allow Pods to carry state                            |
+| [namespaces](namespaces/README.md)                       | Splitting a cluster into namespaces                  |
+| [helm](helm/README.md)                                   | Using the Kubernetes package manager                 |
+| [monitoring](monitoring/README.md)                       | Monitoring your Kubernetes cluster                   |
+| [REST API](rest-api/README.md)                           | Accessing the Kubernetes REST API                    |
+| [Custom Resource Definitions](crds/README.md)            | Creating and using Custom Resource Definitions       |
+| [Authentication](authentication/README.md)               | Ways to authenticate to a Kubernetes cluster.        |
+| [RBAC](rbac/README.md)                                   | Role Based Access Control                            |
+| [Pod Security Policies](pod_security_policies/README.md) | Implementing Pod Security Policies                   |
+
+
 
 ## Requirements to run the demos
 
