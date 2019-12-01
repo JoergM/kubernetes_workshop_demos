@@ -41,12 +41,53 @@ kubectl get -o json ns default
 ```
 The results are the same. Which is no surprise, as kubectl does just call the same API. 
 
+If you prefer to get the results in yaml as this is the more common format in Kubernetes world just set the accept header:
+
+```
+curl -H 'accept: application/yaml' http://localhost:8001/api/v1/namespaces/default 
+```
+
 ### Creating a namespace
+
+Ressources are created using a POST request. The body will contain all necessary information to create the ressource. A ressource description of a namespace is prepared in `namespace.yaml`. To create the namespace use:
+
+```
+curl -X POST -H "content-type: application/yaml" --data-binary "@namespace.yaml" http://localhost:8001/api/v1/namespaces/ 
+```
+
+Use kubectl to get all namespaces and you will find the newly generated namespace.
+
+```
+kubectl get namespaces
+```
 
 ### Changing a namespace
 
+Changing uses the request method PUT on the object. In this example we add a label to the namespace. Take a look into labeled_namespace.yaml to see the new definition. Apply the definition using: 
+
+```
+curl -X PUT -H "content-type: application/yaml" --data-binary "@labeled_namespace.yaml" http://localhost:8001/api/v1/namespaces/api-generated-namespace
+```
+
+You can see the changes using: 
+
+```
+kubectl describe namespace api-generated-namespace
+```
+
 ### Deleting a namespace
 
+Deleting an API Object is just using the DELETE request method on the ressource URL:
+
+```
+curl -X DELETE http://localhost:8001/api/v1/namespaces/api-generated-namespace
+```
+
+Use kubectl to get all namespaces and you will see the namespace disappeared.
+
+```
+kubectl get namespaces
+```
 
 ## Open API Specification
 
