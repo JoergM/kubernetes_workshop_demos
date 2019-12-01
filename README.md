@@ -18,6 +18,7 @@ The following table gives an overview of the content:
 | [stateful_sets](stateful_sets/README.md)                 | Allow Pods to carry state                            |
 | [namespaces](namespaces/README.md)                       | Splitting a cluster into namespaces                  |
 | [helm](helm/README.md)                                   | Using the Kubernetes package manager                 |
+| [kustomize](kustomize/README.md)                         | Using Kustomize to maintain yaml files.              |
 | [monitoring](monitoring/README.md)                       | Monitoring your Kubernetes cluster                   |
 | [REST API](rest-api/README.md)                           | Accessing the Kubernetes REST API                    |
 | [Custom Resource Definitions](crds/README.md)            | Creating and using Custom Resource Definitions       |
