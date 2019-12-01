@@ -24,7 +24,7 @@ curl http://localhost:8001/apis
 
 ## Manipulating namespaces via the API
 
-As an example of using the API we are going to use namespaces. They have only a few attributes so it is easy to handle the neccessary JSON. 
+As an example of using the API we are going to use namespaces. They have only a few attributes so it is easy to handle the neccessary JSON or YAML. 
 
 ### Getting information on a namespace
 
