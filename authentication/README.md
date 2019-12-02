@@ -1,21 +1,11 @@
 # Authentication
 
-## Basic Auth
+## Using a service account token inside a container
 
-wahrscheinlich nicht für minikube.
-Dazu müsste ein API Server parameter beim Start übergeben werden und die Datei muss auf dem Server hinterlegt werden. 
 
-## Certificates
 
-Wahrscheinlich Shell Skript schreiben, dass die Schritte macht. Dieses gut dokumentieren und dann in der Demo zeigen. Steps hier beschreiben. 
 
-https://medium.com/@HoussemDellai/rbac-with-kubernetes-in-minikube-4deed658ea7b
-
-Ziel sollte allerdings eine neue kubeconfig sein.
-
-Zeigen, dass der neue Nutzer nix kann und auf den RBAC Teil verweisen.
-
-## Service Account Token
+## Creating a service account token
 
 Alternativ
 
@@ -38,3 +28,13 @@ führt zu unauthorized. Verweis auf RBAC
 TODO Minimale Rolle, damit sichtbar wird, dass es der Nutzer ist.
 
 Trotzdem evt. Demo aus dem Diagnose Container.
+
+## Creating a new User
+
+Wahrscheinlich Shell Skript schreiben, dass die Schritte macht. Dieses gut dokumentieren und dann in der Demo zeigen. Steps hier beschreiben. 
+
+https://medium.com/@HoussemDellai/rbac-with-kubernetes-in-minikube-4deed658ea7b
+
+Ziel sollte allerdings eine neue kubeconfig sein.
+
+Zeigen, dass der neue Nutzer nix kann und auf den RBAC Teil verweisen.
