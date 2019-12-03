@@ -84,7 +84,9 @@ Of course don't use this in any production system to grant rights to a service a
 
 TBD
 
-# Wahrscheinlich Shell Skript schreiben, dass die Schritte macht. Dieses gut dokumentieren und dann in der Demo zeigen. Steps hier beschreiben. 
-# https://medium.com/@HoussemDellai/rbac-with-kubernetes-in-minikube-4deed658ea7b
-# Ziel sollte allerdings eine neue kubeconfig sein.
-# Zeigen, dass der neue Nutzer nix kann und auf den RBAC Teil verweisen.
+<!--
+Wahrscheinlich Shell Skript schreiben, dass die Schritte macht. Dieses gut dokumentieren und dann in der Demo zeigen. Steps hier beschreiben. 
+https://medium.com/@HoussemDellai/rbac-with-kubernetes-in-minikube-4deed658ea7b
+Ziel sollte allerdings eine neue kubeconfig sein.
+Zeigen, dass der neue Nutzer nix kann und auf den RBAC Teil verweisen.
+-->
