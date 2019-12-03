@@ -1,0 +1,9 @@
+apiVersion: "demo.example.com/v1"
+kind: Foo
+metadata:
+  name: my-first-foo
+  labels:                             # <- Labels can be added without being defined in CRD
+    stage: development
+spec:
+  bar: 23
+  greeting: "Hello World!"
