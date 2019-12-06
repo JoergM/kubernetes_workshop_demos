@@ -6,7 +6,6 @@ There are multiple ways to authenticate to a Kubernetes Cluster. This Demo will 
 - From the outside using credentials of a newly defined service account
 - From the outside via kubectl using a certificate
 
-
 ## Using a service account token inside a pod
 
 To try this method log in to the diagnose container using:
@@ -80,13 +79,36 @@ kubectl create clusterrolebinding --clusterrole=cluster-admin --serviceaccount=d
 
 Of course don't use this in any production system to grant rights to a service account. This service account can now do anything on this cluster. 
 
-## Creating a new User
+## Creating a new User using a certificate
 
-TBD
+Creating a new user that is authorized using a signed certificate involves the following steps:
 
-<!--
-Wahrscheinlich Shell Skript schreiben, dass die Schritte macht. Dieses gut dokumentieren und dann in der Demo zeigen. Steps hier beschreiben. 
-https://medium.com/@HoussemDellai/rbac-with-kubernetes-in-minikube-4deed658ea7b
-Ziel sollte allerdings eine neue kubeconfig sein.
-Zeigen, dass der neue Nutzer nix kann und auf den RBAC Teil verweisen.
--->
+* Creating a new key
+* Creating a signing request
+* Signing it with the private key of your cluster
+* Creating a kubenetes config that uses this certificate
+
+These steps are included in the script `generate_user.sh` in this directory. You can take a look at it to see the specific commands. Start it using:
+
+```
+./generate_user.sh
+```
+
+There is now a new Kubenetes configuration generated in auth_data/config. You can use this config to authenticate by setting the KUBECONFIG environment variable:
+
+```
+export KUBECONFIG="$(pwd)/auth-data/config"
+kubectl get nodes
+```
+
+You will now get a message:
+
+```
+Error from server (Forbidden): nodes is forbidden: User "demo_user" cannot list resource "nodes" in API group "" at the cluster scope
+```
+
+So this user, named demo_user is not allowed to list nodes. We will set the rolebindings for the user in (../rbac/README.md). For now restore the original configuration by unsetting the environment variable:
+
+```
+unset KUBECONFIG
+```
