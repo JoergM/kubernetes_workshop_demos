@@ -1,0 +1,25 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: default
+  name: pods-read-only
+rules:
+- apiGroups: [""]                 #<-- "" means core api group (everything under /api) 
+  resources: ["pods"]
+  verbs: ["get", "watch", "list"]
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: pods-read-only
+  namespace: default
+subjects:
+- kind: User
+  name: demo-user
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: pods-read-only
+  apiGroup: rbac.authorization.k8s.io
