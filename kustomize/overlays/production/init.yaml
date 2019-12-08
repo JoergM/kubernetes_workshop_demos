@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  template:
+    spec:
+      initContainers:                   
+      - name: init
+        command: ["sh", "-c", "echo 'This is PRODUCTION!' > /usr/share/nginx/html/index.html"]  
+
+

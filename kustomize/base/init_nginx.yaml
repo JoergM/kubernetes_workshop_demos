@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: nginx
+  name: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: nginx
+  template:
+    metadata:
+      labels:
+        run: nginx
+    spec:
+      containers:
+      - image: nginx:1.16
+        name: nginx
+        volumeMounts:                   # <-- Mounting the shared volume
+          - name: content
+            mountPath: /usr/share/nginx/html 
+      initContainers:                   # <-- list of containers run before the services containers
+      - image: alpine
+        name: init
+        command: ["sh", "-c", "echo 'Hello from init' > /usr/share/nginx/html/index.html"]  #<-- just running a simple command to create an index.html 
+        volumeMounts:                   # <-- Mounting the shared volume as target
+          - name: content
+            mountPath: /usr/share/nginx/html 
+      volumes:                          #<-- Volume to transfer data between init and service container                             
+      - name: content
+        emptyDir: {}                    #<-- initially just an empty dir in the pod
+
+
