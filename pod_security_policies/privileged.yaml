@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: privileged
+  name: privileged 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: privileged
+  template:
+    metadata:
+      labels:
+        run: privileged
+    spec:
+      containers:
+      - image: joergm/diagnose
+        name: diagnose
+        securityContext:
+          privileged: true            #<-- Run the container in privileged mode
