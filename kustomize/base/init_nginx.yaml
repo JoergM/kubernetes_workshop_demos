@@ -15,7 +15,7 @@ spec:
         run: nginx
     spec:
       containers:
-      - image: nginx:1.16
+      - image: nginx:stable-alpine
         name: nginx
         volumeMounts:                   # <-- Mounting the shared volume
           - name: content

@@ -22,7 +22,7 @@ export KUBECONFIG=${AUTH_DIR}/config
 touch ${AUTH_DIR}/config
 
 # Setting details of the config
-kubectl config set-cluster minikube --certificate-authority=${HOME}/.minikube/ca.crt --embed-certs=true --server=https://$(minikube ip):8443 
+kubectl config set-cluster minikube --certificate-authority=${HOME}/.minikube/ca.crt --embed-certs=true --server=https://127.0.0.1:52793
 kubectl config set-credentials demo-user --client-key=${AUTH_DIR}/user-key.pem --client-certificate=${AUTH_DIR}/user.crt --embed-certs=true 
 kubectl config set-context minikube-demo-user --user demo-user --cluster minikube 
 kubectl config use-context minikube-demo-user 
