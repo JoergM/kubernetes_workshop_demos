@@ -1,63 +1,59 @@
 # Monitoring
 
-## cAdvisor
+## Enable Metrics Server
 
-cAdvisor is an Agent included in every kubelet and thus installed on every node. It collects measurements of the containers running on the node as well as on the node itself. 
-
-**Hint**
-For the following urls you need the ip address of the node you want to look at. If you are using minikube you get it via
+You need to enable the metrics server in order to use metrics and any connected service or command. If you are using minikube you are doning this by enabling the addon:
 
 ```
-minikube ip
+minikube addons enable metrics-server
 ```
 
-The following urls are useful for looking at cAdvisor directly:
+## Accessing the metrics API directly
+
+The Metrics API is not intended to be used directly. Use kubectl top (see below) instead. But if you want to access it you can still do it like this:
+
+API Overview:
+
+ ```
+ kubectl get --raw /apis/metrics.k8s.io/v1beta1/ |jq
+ ```
+
+List all Nodes where metrics are available
 
 ```
-http://<node-ip>:4194/
+kubectl get --raw /apis/metrics.k8s.io/v1beta1/nodes |jq
 ```
 
-for the cAdvisor interface. And:
+Get Data for a specific Node:
 
 ```
-http://<node-ip>:4194/metrics
+kubectl get --raw /apis/metrics.k8s.io/v1beta1/nodes/minikube |jq
 ```
-
-to retrieve the metrics in Prometheus format. This can be useful when you want to scrape node data directly from prometheus without going via Heapster.
-
-## Heapster
-
-Heapster is itself a pod that collects the measurements of all cAdvisor instances in your cluster. When you are using minikube you can enable it using:
+This might be useful if you want to extract e.g. the CPU usage of a node with a tool like jq:
 
 ```
-minikube addons enable heapster
+kubectl get --raw /apis/metrics.k8s.io/v1beta1/nodes/minikube |jq .usage.cpu
 ```
 
-Heapster provides it's data again using the prometheus metrics format. As the addon does not provide an externally available service you have to login to the diagnose-pod ( see [../README.md](../README.md) ):
+## Using kubectl top 
 
-```
-kubectl exec -ti diagnose-... sh
-```
-
-Inside that container you can get the monitoring data using:
-
-```
-curl heapster.kube-system/metrics
-```
-
-When heapster is active you can see performance information on the Kubernetes dashboard and you can also use the top command at the commandline:
+When metrics-server is active you can see performance information on the Kubernetes dashboard and you can also use the top command at the commandline:
 
 ```
 kubectl top node
 kubectl top pod
 ```
 
-## Grafana dashboard
+## Kubernetes dashboard
 
-Where cAdvisor and Heapster work pretty much the same in most Kubernetes installations all further monitoring tools differ very often. It is usual to use a combination of Prometheus or Influx DB as timeseries database and Grafana as dashboard. 
-
-Minikube comes with a influx/grafana combination. You can open the dashboard using:
+You can install the kubernetes dashboard in minikube as addon using:
 
 ```
-minikube -n kube-system service monitoring-grafana
-``` 
+minikube addons enable dashboard
+```
+
+Start the dashboard using:
+
+```
+minikube dashboard
+```

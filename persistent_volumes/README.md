@@ -23,10 +23,10 @@ The persistent volume is the actual instance of the Volume claim. It can be main
 To see the persistence in action create some data inside the redis database. To get an redis-cli log into the pod using:
 
 ```
-kubectl exec -ti redis-... redis-cli
+kubectl exec -ti deploy/redis -- redis-cli
 ```
 
-where redis-... is the complete name of the redis pod. You should get a prompt and you can store a key and value like this:
+You should get a prompt and you can store a key and value like this:
 
 ```
 127.0.0.1:6379> set foo bla
@@ -39,7 +39,7 @@ OK
 Now the data is stored on the persistent volume. You can find the datafiles when logging into the redis pod by using the shell:
 
 ```
-kubectl exec -ti redis-... sh
+kubectl exec -ti deploy/redis -- sh
 /data # ls -lsa
 total 12
      4 drwxrwxrwx    2 root     root          4096 Jun  5 14:24 .
@@ -63,7 +63,7 @@ pod "redis-5ff7b8476c-clkkt" deleted
 If you now list the pods again you will find, that there is a newly created redis pod. You can now test whether the persistence worked by connecting to the redis-cli again:
 
 ```
-kubectl exec -ti redis-... redis-cli
+kubectl exec -ti deploy/redis -- redis-cli
 127.0.0.1:6379> get foo
 "bla"
 127.0.0.1:6379>

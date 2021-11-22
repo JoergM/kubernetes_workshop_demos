@@ -15,7 +15,7 @@ kubectl get pods
 You can find whether the current user is allowed to do a certain operation by using `kubectl config can-i` like:
 
 ```
-kubectl config can-i get po
+kubectl auth can-i get po
 ```
 
 ## Creating read-only access
@@ -43,7 +43,7 @@ kubectl get pods
 
 Also try 
 ```
-kubectl config can-i get po
+kubectl auth can-i get po
 ```
 
 To test whether you are allowed to do other operations try e.g.:

@@ -15,7 +15,7 @@ spec:
         run: redis
     spec:
       containers:
-      - image: redis:3.2-alpine
+      - image: redis:6-alpine
         name: redis
         command: ["redis-server", "--appendonly", "yes"]  #<-- starting redis in persistent mode
         volumeMounts:
