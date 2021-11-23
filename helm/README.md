@@ -4,64 +4,52 @@
 
 ## Installation
 
-### Helm client 
+### Helm 
 
 You need to install the Helm binary on your local computer. Please follow the instructions on the website:
 
-https://docs.helm.sh/using_helm/#installing-helm
+https://helm.sh/docs/intro/install/
 
 On a Mac you would probably use Homebrew like this:
 
 ```
-brew install kubernetes-helm
+brew install helm
 ```
-
-### Server component (Tiller)
-
-Helm also needs a component in the cluster called tiller. In the most simple case this will be installed by using:
-
-```
-helm init
-```
-
-You need to have a Kubernetes cluster configured already. 
 
 ## Searching for charts
 
-To find charts which you can install from the central repository use:
+You can use the included search to search artifact hub using:
 
 ```
-helm search
+helm search hub ...
 ```
 
-Without any parameter this lists all charts available.
+This will usually lead to a large number of results. It is probably easier to use the web search at:
 
-## Handling charts
+https://artifacthub.io/ 
 
-### Installing
+## Adding a repo and installing a package
 
-The following example installs the wordpress chart with some values as defined in [wordpress_values.yaml](wordpress_values.yaml)
-
-```
-helm install -f wordpress_values.yaml --name wordpress stable/wordpress
-```
-
-Take a look at the dashboard to see what has been installed with this one command. There are:
-
-- Deployments for a mariaDB for persistence and the Wordpress installation itself
-- Persistent Volumes for Wordpress and MariaDB
-- Services
-- and an Ingress that publishes the Blog under wordpress.local
-
-When installing this on minikube you have to add a line to your /etc/hosts like this
+In this example we are installing the kube-prometheus-stack (https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack). 
 
 ```
-192.168.99.100  wordpress.local
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+helm install promstack prometheus-community/kube-prometheus-stack
 ```
 
-You can know reach the blog using under the url [http://wordpress.local](http://wordpress.local).
+### Taking a look at the results
 
-Also try the admin interface:[http://wordpress.local/admin](http://wordpress.local/admin). Login data is as defined in the values file [wordpress_values.yaml](wordpress_values.yaml). 
+Assuming you are using minikube open grafana using:
+
+```
+minikube service promstack-grafana 
+```
+
+The login to the grafana dashboard is: `admin/prom-operator`
+
+Now browse the readymade dashboards using the search icon in the left toolbar of Grafana.
+
 
 ### Listing all installed charts
 
@@ -72,30 +60,18 @@ helm list
 ### Deleting the chart
 
 ```
-helm delete --purge wordpress
+helm delete kube-prometheus-stack
 ``` 
 
 ## Getting more information about a chart
 
-### Prefetching a chart
-
 To take a detailed look at a chart you can fetch it locally using:
 
 ```
-helm fetch --untar stable/owncloud
+helm pull --untar prometheus-community/kube-prometheus-stack
 ```
 
-You will know have a local directory called `owncloud` which contains the full chart. Take a look at it to get a feeling for the structure of a chart. 
+You will know have a local directory called `kube-prometheus-stack` which contains the full chart. Take a look at it to get a feeling for the structure of a chart. 
 
 For many use cases the most important file is values.yaml at the top level of this directory. This gives a good overview of the
 configurable values of the chart. 
-
-### Running Helm in Debug mode
-
-It is a good idea to take a look at whats going to be installed, by running the following first:
-
-```
-helm install stable/owncloud --dry-run --debug
-```
-
-This lists all yaml files that will be applied by installing this chart. It already replaces all variable values.
