@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1  
 kind: Ingress
 metadata:
   name: nginx-ingress
@@ -10,12 +10,15 @@ spec:
     http:
       paths:
       - path: /nginx             #<-- path this rule applies to
+        pathType: Prefix
         backend:
-          serviceName: nginx     #<-- Service that serves the requests
-          servicePort: 80
+          service:
+            name: nginx     #<-- Service that serves the requests
+            port: 
+              number: 80
 
 ---
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1 
 kind: Ingress
 metadata:
   name: httpd-ingress           # <-- the same as above only for another service
@@ -27,7 +30,10 @@ spec:
     http:
       paths:
       - path: /httpd
+        pathType: Prefix
         backend:
-          serviceName: httpd
-          servicePort: 80
+          service:
+            name: httpd     #<-- Service that serves the requests
+            port: 
+              number: 80
 
